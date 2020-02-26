@@ -1,5 +1,6 @@
-# AngularSeedApp
+# Angular Seed App
 
+Angular Seed App for [SASjs](https://github.com/macropeople/sasjs).
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.3.
 
 ## Development server
