@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { StateService } from '../state.service';
 
@@ -9,6 +9,7 @@ import { StateService } from '../state.service';
 })
 export class LoginModalComponent implements OnInit {
   @ViewChild('loginForm', { static: true }) loginFormTemplate: TemplateRef<any>;
+
   userName = '';
   password = '';
   private dialogRef: MatDialogRef<LoginModalComponent>;
@@ -28,7 +29,6 @@ export class LoginModalComponent implements OnInit {
   }
 
   signIn() {
-    console.log(this.userName);
     this.stateService.setIsLoggedIn(true);
     this.hideLoginModal();
   }

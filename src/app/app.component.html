@@ -2,6 +2,29 @@
   <i class="logo" aria-hidden="false" aria-label="MacroPeople Logo"></i>
   <mat-icon aria-hidden="false" aria-label="Profile Menu">person</mat-icon>
 </mat-toolbar>
+<div class="home-page">
+  <h2>Welcome to the <span class="code">SASjs</span> Seed App for Angular!</h2>
+  <div>
+    App Source Code:
+    <a target="_blank" rel="noopener noreferrer" href="https://github.com/macropeople/angular-seed-app">
+      https://github.com/macropeople/angular-seed-app
+    </a>
+  </div>
+  <br />
+  <div>
+    <span class="code">SASjs</span> Source Code:
+    <a target="_blank" rel="noopener noreferrer" href="https://github.com/macropeople/sasjs">
+      https://github.com/macropeople/sasjs
+    </a>
+  </div>
+  <br />
+  <div>
+    <span class="code">SASjs</span> on NPM:
+    <a target="_blank" rel="noopener noreferrer" href="https://www.npmjs.com/package/sasjs">
+      https://www.npmjs.com/package/sasjs
+    </a>
+  </div>
+</div>
 <ng-container *ngIf="!(isLoggedIn$ | async)">
   <app-login-modal></app-login-modal>
 </ng-container>

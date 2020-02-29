@@ -11,3 +11,12 @@
     background-size: contain;
   }
 }
+
+.home-page {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

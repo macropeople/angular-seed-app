@@ -4,12 +4,12 @@
     <h3 class="sign-in">Sign In</h3>
     <mat-form-field class="full-width">
       <mat-label>User Name</mat-label>
-      <input matInput type="text" [(ngModel)]="userName" required />
+      <input matInput type="text" name="username" autocomplete="username" [(ngModel)]="userName" required />
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input matInput type="password" [(ngModel)]="password" required />
+      <input matInput type="password" name="password" autocomplete="current-password" [(ngModel)]="password" required />
     </mat-form-field>
   </form>
   <button color="primary" mat-raised-button class="full-width login-button" (click)="signIn()">Sign In</button>
