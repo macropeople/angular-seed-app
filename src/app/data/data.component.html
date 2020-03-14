@@ -1,0 +1,57 @@
+<div class="data-page">
+    <mat-spinner *ngIf="(areas | async).length < 1" diameter="70"></mat-spinner>
+    <div *ngIf="(areas | async).length > 0" class="areas-select-wrapper">
+        <mat-form-field>
+            <mat-label>Areas</mat-label>
+            <mat-select [(ngModel)]="selectedArea">
+              <mat-option *ngFor="let area of (areas | async)" [value]="area.AREA">
+                {{area.AREA}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button (click)="submitData()" mat-stroked-button color="primary" [disabled]="springsLoading || !selectedArea">Submit</button>
+    </div>
+
+    <mat-spinner *ngIf="springsLoading" diameter="70"></mat-spinner>
+
+    <table *ngIf="springs.length > 0" mat-table [dataSource]="springs" class="mat-elevation-z8">
+        <ng-container matColumnDef="LATITUDE">
+          <th mat-header-cell *matHeaderCellDef> LATITUDE </th>
+          <td mat-cell *matCellDef="let element"> {{element.LATITUDE}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="LONGITUDE">
+          <th mat-header-cell *matHeaderCellDef> LONGITUDE </th>
+          <td mat-cell *matCellDef="let element"> {{element.LONGITUDE}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="NAME">
+          <th mat-header-cell *matHeaderCellDef> NAME </th>
+          <td mat-cell *matCellDef="let element"> {{element.NAME}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="AREA">
+          <th mat-header-cell *matHeaderCellDef> AREA </th>
+          <td mat-cell *matCellDef="let element"> {{element.AREA}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="TYPE">
+          <th mat-header-cell *matHeaderCellDef> TYPE </th>
+          <td mat-cell *matCellDef="let element"> {{element.TYPE}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="FARENHEIT">
+          <th mat-header-cell *matHeaderCellDef> FARENHEIT </th>
+          <td mat-cell *matCellDef="let element"> {{element.FARENHEIT}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="CELSIUS">
+          <th mat-header-cell *matHeaderCellDef> CELSIUS </th>
+          <td mat-cell *matCellDef="let element"> {{element.CELSIUS}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+</div>

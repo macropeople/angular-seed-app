@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { StateService } from './state.service';
 import { Subscription } from 'rxjs';
+import { SasService } from './sas.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,10 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent {
   isLoggedIn$ = this.stateService.isUserLoggedIn;
-  constructor(private stateService: StateService) {}
+  constructor(
+    private stateService: StateService,
+    private sasService: SasService
+    ) {
+      sasService.fetchStartupData();
+    }
 }

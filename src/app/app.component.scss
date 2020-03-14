@@ -4,19 +4,15 @@
   height: 65px;
   padding: 0 8px;
 
+  .navigation-side {
+    display: flex;
+    height: 100%;
+  }
+
   .logo {
     background: url('../assets/logo-white.png');
     width: 65px;
     height: 100%;
     background-size: contain;
   }
-}
-
-.home-page {
-  padding: 16px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
