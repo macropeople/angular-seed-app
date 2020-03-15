@@ -13,6 +13,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 
 import { LoginModalComponent } from './login-modal/login-modal.component';
@@ -34,7 +36,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatSelectModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatTableModule
+    MatTableModule,
+    MatMenuModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,12 +2,14 @@
   <span class="navigation-side">
     <i class="logo" aria-hidden="false" aria-label="MacroPeople Logo"></i>
 
-    <button mat-button routerLink="/homepage">Homepage</button>
-    <button mat-button routerLink="/data">Data</button>
+    <button mat-button routerLinkActive="active" routerLink="/homepage">Homepage</button>
+    <button mat-button routerLinkActive="active" routerLink="/data">Data</button>
   </span>
 
 
-  <mat-icon aria-hidden="false" aria-label="Profile Menu">person</mat-icon>
+  <button mat-icon-button aria-label="Account menu" [matMenuTriggerFor]="accountMenu">
+    <mat-icon aria-hidden="false" aria-label="Profile Menu">person</mat-icon>
+  </button>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
@@ -15,3 +17,9 @@
 <ng-container *ngIf="!(isLoggedIn$ | async)">
   <app-login-modal></app-login-modal>
 </ng-container>
+
+<mat-menu #accountMenu="matMenu">
+  <button mat-menu-item>Requests</button>
+  <mat-divider class="menu-divider"></mat-divider>
+  <button (click)="logout()" mat-menu-item>Log out</button>
+</mat-menu>y

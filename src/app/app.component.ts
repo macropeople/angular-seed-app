@@ -15,5 +15,9 @@ export class AppComponent {
     private sasService: SasService
     ) {
       sasService.fetchStartupData();
-    }
+  }
+
+  public logout() {
+    this.sasService.logout();
+  }
 }
