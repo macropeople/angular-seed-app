@@ -11,6 +11,10 @@
         
         ::ng-deep clr-select-container {
             margin: 0;
+            
+            select {
+                min-width: 200px;
+            }
         }
 
         button {

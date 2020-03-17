@@ -1,0 +1,39 @@
+::ng-deep {
+    .stack-view {
+        height: auto !important;
+    }
+
+    .content {
+        pre {
+            word-break: break-all;
+            white-space: pre-wrap;
+        }
+
+        .stack-block-label {
+            width: 100%;
+            padding-left: .6rem !important;
+    
+            .stack-view-key {
+                display: none !important;
+            }
+        }
+    }
+}
+
+.log-wrapper {
+    min-height: 50px;
+    padding: 10px;
+    margin-top: 10px;
+    
+    white-space: pre-wrap;
+    border-radius: 3px;
+
+    border: 1px solid #e2e2e2;
+    background-color: #fbfbfb;
+}
+
+.no-reqs {
+    border-top: 1px solid #0000001a;
+    padding-top: 5px;
+    text-align: center;
+}

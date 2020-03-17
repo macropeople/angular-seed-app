@@ -1,0 +1,49 @@
+<clr-modal [clrModalOpen]="opened" (clrModalOpenChange)="modalOpenChange($event)" clrModalSize="xl">
+    <h3 class="modal-title">
+        Request History
+        <p style="margin-top: 0;">App Location: /Public/app</p>
+    </h3>
+    <div style="height: 70vh;" class="modal-body">
+        <p *ngIf="sasjsRequests.length < 1" class="no-reqs">No requests made</p>
+        <clr-stack-view *ngIf="sasjsRequests.length > 0">
+            <clr-stack-block *ngFor="let programLog of sasjsRequests">
+                <clr-stack-label>{{sasjsConfig.appLoc}}</clr-stack-label>
+                <clr-stack-content>{{parseLogTimestamp(programLog.timestamp)}}</clr-stack-content>
+                <clr-stack-block class="content">
+                    <clr-stack-content>
+
+                        <clr-tabs>
+                            <clr-tab>
+                                <button clrTabLink>SAS Log</button>
+                                <ng-template [(clrIfActive)]="sasLogActive">
+                                    <clr-tab-content>
+                                        <div class="log-wrapper" [innerHTML]="programLog.logFile"></div>
+                                    </clr-tab-content>
+                                </ng-template>
+                            </clr-tab>
+                        
+                            <clr-tab>
+                                <button clrTabLink>SAS Source Code</button>
+                                <ng-template [(clrIfActive)]="sasSourceCodeActive">
+                                    <clr-tab-content>
+                                        <div class="log-wrapper" [innerHTML]="programLog.sourceCode"></div>
+                                    </clr-tab-content>
+                                </ng-template>
+                            </clr-tab>
+                        
+                            <clr-tab>
+                                <button clrTabLink>SAS Generated Code</button>
+                                <ng-template [(clrIfActive)]="sasGeneratedCodeActive">
+                                    <clr-tab-content>
+                                        <div class="log-wrapper" [innerHTML]="programLog.generatedCode"></div>
+                                    </clr-tab-content>
+                                </ng-template>
+                            </clr-tab>
+                        </clr-tabs>
+
+                    </clr-stack-content>
+                </clr-stack-block>
+            </clr-stack-block>
+        </clr-stack-view>
+    </div>
+</clr-modal>

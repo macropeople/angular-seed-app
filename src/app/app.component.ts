@@ -9,7 +9,9 @@ import { SasService } from './sas.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isLoggedIn$ = this.stateService.isUserLoggedIn;
+  public isLoggedIn$ = this.stateService.isUserLoggedIn;
+  public requestModal: boolean = false;
+
   constructor(
     private stateService: StateService,
     private sasService: SasService

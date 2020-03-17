@@ -9,14 +9,14 @@
       <option *ngFor="let area of (areas | async)" [value]="area.AREA">{{area.AREA}}</option>
     </select>
 
-    <button (click)="submitData()" class="btn btn-primary">SUBMIT</button>
+    <button (click)="submitData()" class="btn btn-primary" [disabled]="!selectedArea">SUBMIT</button>
   </div>
 
   <span *ngIf="springsLoading" class="spinner spinner-md">
     Loading...
   </span>
 
-  <table *ngIf="springs.length > 0" class="table">
+  <table *ngIf="springs.length > 0 && !springsLoading" class="table">
     <thead>
         <tr>
             <th>LATITUDE</th>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import SASjs from 'sasjs';
+import SASjs, { SASjsConfig } from 'sasjs';
 import { StateService } from './state.service';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { StateService } from './state.service';
 })
 export class SasService {
   private _sasService: any;
+  public sasjsConfig: SASjsConfig = new SASjsConfig;
+  public sasjsRequests;
 
   constructor(
     private stateService: StateService
@@ -21,6 +23,8 @@ export class SasService {
       serverType: "SAS9",
       debug: true
     });
+
+    this.sasjsConfig = this._sasService.getSasjsConfig();
   }
 
   public fetchStartupData() {
@@ -72,5 +76,9 @@ export class SasService {
     this._sasService.logOut().then(() => {
       this.stateService.setIsLoggedIn(false);
     })
+  }
+
+  public getSasRequests() {
+    return this._sasService.getSasRequests();
   }
 }

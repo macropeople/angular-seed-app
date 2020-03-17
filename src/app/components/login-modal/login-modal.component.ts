@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { StateService } from '../state.service';
-import { SasService } from '../sas.service';
+import { StateService } from '../../state.service';
+import { SasService } from '../../sas.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -9,8 +8,6 @@ import { SasService } from '../sas.service';
   styleUrls: ['./login-modal.component.scss']
 })
 export class LoginModalComponent implements OnInit {
-  public opened: boolean = true;
-
   userName = '';
   password = '';
 
