@@ -4,6 +4,11 @@
   height: 65px;
   padding: 0 8px;
 
+  .navigation-side {
+    display: flex;
+    height: 100%;
+  }
+
   .logo {
     background: url('../assets/logo-white.png');
     width: 65px;
@@ -12,11 +17,6 @@
   }
 }
 
-.home-page {
-  padding: 16px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+button.active {
+  background: #3a499c;
 }
