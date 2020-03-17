@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateService } from '../state.service';
 import { SasService } from '../sas.service';
-import { SpringModel } from '../models/SpringModel';
 
 @Component({
   selector: 'app-data',
@@ -11,7 +10,7 @@ import { SpringModel } from '../models/SpringModel';
 export class DataComponent implements OnInit {
   public areas = this.stateService.startupData;
   public selectedArea: any;
-  public springs: SpringModel[] = [];
+  public springs: any[] = [];
   public springsLoading: boolean = false;
 
   public displayedColumns: string[] = ['LATITUDE', 'LONGITUDE', 'NAME', 'AREA', 'TYPE', 'FARENHEIT', 'CELSIUS'];
