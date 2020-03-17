@@ -18,8 +18,8 @@ export class SasService {
       pathSAS9: "/SASStoredProcess/do",
       pathSASViya: "/SASJobExecution",
       appLoc: "/Public/app",
-      serverType: "SASVIYA",
-      debug: false
+      serverType: "SAS9",
+      debug: true
     });
   }
 
@@ -39,7 +39,7 @@ export class SasService {
         }
         resolve(res);
       }, (err: any) => {
-        if (err.toString().includes("login required")) this.stateService.setIsLoggedIn(false);
+        if (err) this.stateService.setIsLoggedIn(false);
         reject(err);
       });
     });

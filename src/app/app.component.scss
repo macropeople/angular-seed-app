@@ -1,22 +1,8 @@
-.app-bar {
-  display: flex;
-  justify-content: space-between;
-  height: 65px;
-  padding: 0 8px;
+.branding {
+  min-width: auto !important;
 
-  .navigation-side {
-    display: flex;
+  img {
     height: 100%;
-  }
-
-  .logo {
-    background: url('../assets/logo-white.png');
-    width: 65px;
-    height: 100%;
-    background-size: contain;
   }
 }
 
-button.active {
-  background: #3a499c;
-}
