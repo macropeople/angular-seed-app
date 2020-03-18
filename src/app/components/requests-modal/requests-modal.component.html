@@ -1,11 +1,12 @@
 <clr-modal [clrModalOpen]="opened" (clrModalOpenChange)="modalOpenChange($event)" clrModalSize="xl">
     <h3 class="modal-title">
         Request History
-        <p style="margin-top: 0;">App Location: /Public/app</p>
+        <p style="margin-top: 0;">App Location: {{sasjsConfig.appLoc}}</p>
     </h3>
     <div style="height: 70vh;" class="modal-body">
-        <p *ngIf="sasjsRequests.length < 1" class="no-reqs">No requests made</p>
-        <clr-stack-view *ngIf="sasjsRequests.length > 0">
+        <p *ngIf="!sasjsRequests" class="no-reqs">No requests made</p>
+        
+        <clr-stack-view *ngIf="sasjsRequests">
             <clr-stack-block *ngFor="let programLog of sasjsRequests">
                 <clr-stack-label>{{sasjsConfig.appLoc}}</clr-stack-label>
                 <clr-stack-content>{{parseLogTimestamp(programLog.timestamp)}}</clr-stack-content>
@@ -36,6 +37,39 @@
                                 <ng-template [(clrIfActive)]="sasGeneratedCodeActive">
                                     <clr-tab-content>
                                         <div class="log-wrapper" [innerHTML]="programLog.generatedCode"></div>
+                                    </clr-tab-content>
+                                </ng-template>
+                            </clr-tab>
+
+                            <clr-tab>
+                                <clr-dropdown [clrCloseMenuOnItemClick]="true" class="work-tables-dropdown" clrTabLink>
+                                    <button clrDropdownTrigger>
+                                        SAS Work Tables
+                                        <clr-icon shape="caret down"></clr-icon>
+                                    </button>
+                                    <clr-dropdown-menu *clrIfOpen>
+                                        <div *ngFor="let table of programLog.SASWORK | keyvalue" (click)="programLog['selectedTable'] = table.key" [class.selected]="programLog['selectedTable'] === table.key" class="dropdown-item" clrDropdownItem>{{table.key}}</div>
+                                    </clr-dropdown-menu>
+                                </clr-dropdown>
+
+                                <ng-template [(clrIfActive)]="tablesActive">
+                                    <clr-tab-content>
+                                        <p *ngIf="programLog['selectedTable']" style="margin-top: 10px;"><strong>{{programLog['selectedTable']}} (first 10 rows) </strong></p>
+
+                                        <div style="min-height: 50vh;">
+                                            <table *ngIf="programLog['selectedTable']" style="margin-top: 10px;" class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th *ngFor="let column of programLog.SASWORK[programLog['selectedTable']].first10rows[0] | keyvalue">{{column.key}}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let row of programLog.SASWORK[programLog['selectedTable']].first10rows">
+                                                        <td *ngFor="let column of programLog.SASWORK[programLog['selectedTable']].first10rows[0] | keyvalue">{{row[column.key]}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </clr-tab-content>
                                 </ng-template>
                             </clr-tab>

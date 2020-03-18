@@ -1,4 +1,8 @@
 ::ng-deep {
+    .work-tables-dropdown button {
+        color: var(--clr-nav-link-color, #8c8c8c) !important;
+    }
+
     .stack-view {
         height: auto !important;
     }
@@ -17,6 +21,12 @@
                 display: none !important;
             }
         }
+    }
+}
+
+.dropdown-item {
+    &.selected {
+        background: #d8e3e9;
     }
 }
 

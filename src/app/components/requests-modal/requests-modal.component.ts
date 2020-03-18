@@ -15,7 +15,8 @@ export class RequestsModalComponent implements OnInit {
   @Input()
   set opened(value: boolean) {
     this._opened = value;
-    if (value) this.sasjsRequests = this.sasService.getSasRequests();
+    if (value) this.modalOpened();
+
     console.log(this.sasjsRequests);
   }
 
@@ -24,9 +25,11 @@ export class RequestsModalComponent implements OnInit {
   public sasLogActive: boolean = true;
   public sasSourceCodeActive: boolean = false;
   public sasGeneratedCodeActive: boolean = false;
+  public tablesActive: boolean = false;
 
   public sasjsConfig = this.sasService.sasjsConfig;
   public sasjsRequests;
+  public workTables;
 
   constructor(private sasService: SasService) {}
 
@@ -51,5 +54,9 @@ export class RequestsModalComponent implements OnInit {
   public modalOpenChange(state) {
     this.opened = state;
     this.openedChange.emit(this.opened);
+  }
+
+  public modalOpened() {
+    this.sasjsRequests = this.sasService.getSasRequests();
   }
 }

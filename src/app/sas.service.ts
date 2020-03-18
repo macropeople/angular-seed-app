@@ -9,7 +9,6 @@ import { StateService } from './state.service';
 export class SasService {
   private _sasService: any;
   public sasjsConfig: SASjsConfig = new SASjsConfig;
-  public sasjsRequests;
 
   constructor(
     private stateService: StateService
