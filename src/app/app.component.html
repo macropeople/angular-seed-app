@@ -7,13 +7,20 @@
       <a routerLinkActive="active" routerLink="/data" class="nav-link nav-text">Data</a>
   </div>
   <div class="header-actions">
-    <clr-dropdown [clrCloseMenuOnItemClick]="true">
+    <clr-dropdown [clrCloseMenuOnItemClick]="false">
       <button clrDropdownTrigger aria-label="user">
         <clr-icon shape="user"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
-        <div (click)="requestModal = true" clrDropdownItem>Requests</div>
+        <clr-toggle-wrapper clrDropdownItem>
+          <input type="checkbox" clrToggle name="debug" [(ngModel)]="sasjsConfig.debug" (change)="debugChanged()"/>
+          <label>Debug</label>
+        </clr-toggle-wrapper>
+
         <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+
+        <div (click)="requestModal = true" clrDropdownItem>Requests</div>
+        
         <div (click)="logout()" clrDropdownItem>Log out</div>
       </clr-dropdown-menu>
     </clr-dropdown>

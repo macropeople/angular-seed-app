@@ -8,7 +8,6 @@ import { StateService } from './state.service';
 })
 export class SasService {
   private _sasService: any;
-  public sasjsConfig: SASjsConfig = new SASjsConfig;
 
   constructor(
     private stateService: StateService
@@ -22,8 +21,6 @@ export class SasService {
       serverType: "SAS9",
       debug: true
     });
-
-    this.sasjsConfig = this._sasService.getSasjsConfig();
   }
 
   public fetchStartupData() {
@@ -77,7 +74,15 @@ export class SasService {
     })
   }
 
+  public getSasjsConfig() {
+    return this._sasService.getSasjsConfig();
+  }
+
   public getSasRequests() {
     return this._sasService.getSasRequests();
+  }
+
+  public setDebugState(state: boolean) {
+    this._sasService.setDebugState(state);
   }
 }

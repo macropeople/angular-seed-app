@@ -27,7 +27,7 @@ export class RequestsModalComponent implements OnInit {
   public sasGeneratedCodeActive: boolean = false;
   public tablesActive: boolean = false;
 
-  public sasjsConfig = this.sasService.sasjsConfig;
+  public sasjsConfig = this.sasService.getSasjsConfig();
   public sasjsRequests;
   public workTables;
 
