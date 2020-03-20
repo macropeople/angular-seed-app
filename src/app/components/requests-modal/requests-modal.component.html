@@ -8,7 +8,7 @@
         
         <clr-stack-view *ngIf="sasjsRequests">
             <clr-stack-block *ngFor="let programLog of sasjsRequests">
-                <clr-stack-label>{{sasjsConfig.appLoc}}</clr-stack-label>
+                <clr-stack-label>{{programLog.serviceLink}}</clr-stack-label>
                 <clr-stack-content>{{parseLogTimestamp(programLog.timestamp)}}</clr-stack-content>
                 <clr-stack-block class="content">
                     <clr-stack-content>
