@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 
 // import SASjs from 'sasjs';
-import * as SASjs from '../sasjs/index';
+// import * as SASjs from '../sasjs/index.js';
 import { StateService } from './state.service';
+
+declare let SASjs: any;
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class SasService {
   constructor(
     private stateService: StateService
   ) {
-    this._sasService = new SASjs({
+    this._sasService = new SASjs.default({
       pathSAS9: "/SASStoredProcess/do",
       pathSASViya: "/SASJobExecution",
       appLoc: "/Public/app",
