@@ -28,8 +28,8 @@ export class RequestsModalComponent implements OnInit {
   public tablesActive: boolean = false;
 
   public sasjsConfig = this.sasService.getSasjsConfig();
-  public sasjsRequests;
-  public workTables;
+  public sasjsRequests: any;
+  public workTables: any;
 
   constructor(private sasService: SasService) {}
 
@@ -39,19 +39,19 @@ export class RequestsModalComponent implements OnInit {
     return `${this.formatTimestamp(timestamp)} ${this.timestampFromNow(timestamp)}`
   }
 
-  public formatTimestamp(timestamp) {
+  public formatTimestamp(timestamp: any) {
     return moment(timestamp).format
     ? moment(timestamp).format('dddd, MMMM Do YYYY, h:mm:ss a')
     : timestamp;
   }
 
-  public timestampFromNow(timestamp) {
+  public timestampFromNow(timestamp: any) {
     return moment(timestamp).format
     ? ` (${moment(timestamp).fromNow()})`
     : '';
   }
 
-  public modalOpenChange(state) {
+  public modalOpenChange(state: any) {
     this.opened = state;
     this.openedChange.emit(this.opened);
   }

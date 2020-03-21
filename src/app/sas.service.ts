@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import SASjs, { SASjsConfig } from 'sasjs';
+import SASjs from 'sasjs';
 import { StateService } from './state.service';
 
 @Injectable({
@@ -54,13 +54,13 @@ export class SasService {
         this.stateService.setIsLoggedIn(res.isLoggedIn);
         return res.isLoggedIn;
       },
-      err => {
+      (err: any) => {
         console.error(err);
         this.stateService.setIsLoggedIn(false);
         return false;
       }
     )
-    .catch(e => {
+    .catch((e: any) => {
       if (e === 403) {
         console.error("Invalid host");
       }

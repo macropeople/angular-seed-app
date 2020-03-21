@@ -13,7 +13,7 @@
       </button>
       <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
         <clr-toggle-wrapper clrDropdownItem>
-          <input type="checkbox" clrToggle name="debug" [(ngModel)]="sasjsConfig.debug" (change)="debugChanged()"/>
+          <input type="checkbox" clrToggle name="debug" [(ngModel)]="sasjsConfig!.debug" (change)="debugChanged()"/>
           <label>Debug</label>
         </clr-toggle-wrapper>
 
@@ -29,7 +29,7 @@
 
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="!(isLoggedIn$ | async)">
+<ng-container *ngIf="!isLoggedIn">
   <app-login-modal></app-login-modal>
 </ng-container>
 
