@@ -1,57 +1,43 @@
 <div class="data-page">
-    <mat-spinner *ngIf="(areas | async).length < 1" diameter="70"></mat-spinner>
-    <div *ngIf="(areas | async).length > 0" class="areas-select-wrapper">
-        <mat-form-field>
-            <mat-label>Areas</mat-label>
-            <mat-select [(ngModel)]="selectedArea">
-              <mat-option *ngFor="let area of (areas | async)" [value]="area.AREA">
-                {{area.AREA}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
+  <span *ngIf="(areas | async).length < 1" class="spinner spinner-md">
+    Loading...
+  </span>
 
-        <button (click)="submitData()" mat-stroked-button color="primary" [disabled]="springsLoading || !selectedArea">Submit</button>
-    </div>
+  <div *ngIf="(areas | async).length > 0" class="areas-select-wrapper">
+    <select clrSelect name="options" [(ngModel)]="selectedArea">
+      <option *ngIf="selectedArea === undefined" [value]="undefined">Select from dropdown</option>
+      <option *ngFor="let area of (areas | async)" [value]="area.AREA">{{area.AREA}}</option>
+    </select>
 
-    <mat-spinner *ngIf="springsLoading" diameter="70"></mat-spinner>
+    <button (click)="submitData()" class="btn btn-primary" [disabled]="!selectedArea">SUBMIT</button>
+  </div>
 
-    <table *ngIf="springs.length > 0" mat-table [dataSource]="springs" class="mat-elevation-z8">
-        <ng-container matColumnDef="LATITUDE">
-          <th mat-header-cell *matHeaderCellDef> LATITUDE </th>
-          <td mat-cell *matCellDef="let element"> {{element.LATITUDE}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="LONGITUDE">
-          <th mat-header-cell *matHeaderCellDef> LONGITUDE </th>
-          <td mat-cell *matCellDef="let element"> {{element.LONGITUDE}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="NAME">
-          <th mat-header-cell *matHeaderCellDef> NAME </th>
-          <td mat-cell *matCellDef="let element"> {{element.NAME}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="AREA">
-          <th mat-header-cell *matHeaderCellDef> AREA </th>
-          <td mat-cell *matCellDef="let element"> {{element.AREA}} </td>
-        </ng-container>
+  <span *ngIf="springsLoading" class="spinner spinner-md">
+    Loading...
+  </span>
 
-        <ng-container matColumnDef="TYPE">
-          <th mat-header-cell *matHeaderCellDef> TYPE </th>
-          <td mat-cell *matCellDef="let element"> {{element.TYPE}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="FARENHEIT">
-          <th mat-header-cell *matHeaderCellDef> FARENHEIT </th>
-          <td mat-cell *matCellDef="let element"> {{element.FARENHEIT}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="CELSIUS">
-          <th mat-header-cell *matHeaderCellDef> CELSIUS </th>
-          <td mat-cell *matCellDef="let element"> {{element.CELSIUS}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+  <table *ngIf="springs.length > 0 && !springsLoading" class="table">
+    <thead>
+        <tr>
+            <th>LATITUDE</th>
+            <th>LONGITUDE</th>
+            <th>NAME</th>
+            <th>AREA</th>
+            <th>TYPE</th>
+            <th>FARENHEIT</th>
+            <th>CELSIUS</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let spring of springs">
+            <td>{{spring.LATITUDE}}</td>
+            <td>{{spring.LONGITUDE}}</td>
+            <td>{{spring.NAME}}</td>
+            <td>{{spring.AREA}}</td>
+            <td>{{spring.TYPE}}</td>
+            <td>{{spring.FARENHEIT}}</td>
+            <td>{{spring.CELSIUS}}</td>
+        </tr>
+    </tbody>
+  </table>
 </div>

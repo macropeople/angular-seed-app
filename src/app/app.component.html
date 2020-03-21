@@ -1,16 +1,31 @@
-<mat-toolbar color="primary" class="mat-elevation-z6 app-bar">
-  <span class="navigation-side">
-    <i class="logo" aria-hidden="false" aria-label="MacroPeople Logo"></i>
+<header class="header-6">
+  <div class="branding">
+      <img src="/assets/logo-white.png">
+  </div>
+  <div class="header-nav">
+      <a routerLinkActive="active" routerLink="/homepage" class="nav-link nav-text">Homepage</a>
+      <a routerLinkActive="active" routerLink="/data" class="nav-link nav-text">Data</a>
+  </div>
+  <div class="header-actions">
+    <clr-dropdown [clrCloseMenuOnItemClick]="false">
+      <button clrDropdownTrigger aria-label="user">
+        <clr-icon shape="user"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+        <clr-toggle-wrapper clrDropdownItem>
+          <input type="checkbox" clrToggle name="debug" [(ngModel)]="sasjsConfig.debug" (change)="debugChanged()"/>
+          <label>Debug</label>
+        </clr-toggle-wrapper>
 
-    <button mat-button routerLinkActive="active" routerLink="/homepage">Homepage</button>
-    <button mat-button routerLinkActive="active" routerLink="/data">Data</button>
-  </span>
+        <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
 
-
-  <button mat-icon-button aria-label="Account menu" [matMenuTriggerFor]="accountMenu">
-    <mat-icon aria-hidden="false" aria-label="Profile Menu">person</mat-icon>
-  </button>
-</mat-toolbar>
+        <div (click)="requestModal = true" clrDropdownItem>Requests</div>
+        
+        <div (click)="logout()" clrDropdownItem>Log out</div>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>
 
 <router-outlet></router-outlet>
 
@@ -18,8 +33,4 @@
   <app-login-modal></app-login-modal>
 </ng-container>
 
-<mat-menu #accountMenu="matMenu">
-  <button mat-menu-item>Requests</button>
-  <mat-divider class="menu-divider"></mat-divider>
-  <button (click)="logout()" mat-menu-item>Log out</button>
-</mat-menu>y
+<app-requests-modal [(opened)]="requestModal"></app-requests-modal>

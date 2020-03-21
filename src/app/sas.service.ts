@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import SASjs from 'sasjs';
+import SASjs, { SASjsConfig } from 'sasjs';
 import { StateService } from './state.service';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class SasService {
       pathSAS9: "/SASStoredProcess/do",
       pathSASViya: "/SASJobExecution",
       appLoc: "/Public/app",
-      serverType: "SASVIYA",
-      debug: false
+      serverType: "SAS9",
+      debug: true
     });
   }
 
@@ -39,7 +39,7 @@ export class SasService {
         }
         resolve(res);
       }, (err: any) => {
-        if (err.toString().includes("login required")) this.stateService.setIsLoggedIn(false);
+        if (err) this.stateService.setIsLoggedIn(false);
         reject(err);
       });
     });
@@ -72,5 +72,17 @@ export class SasService {
     this._sasService.logOut().then(() => {
       this.stateService.setIsLoggedIn(false);
     })
+  }
+
+  public getSasjsConfig() {
+    return this._sasService.getSasjsConfig();
+  }
+
+  public getSasRequests() {
+    return this._sasService.getSasRequests();
+  }
+
+  public setDebugState(state: boolean) {
+    this._sasService.setDebugState(state);
   }
 }
