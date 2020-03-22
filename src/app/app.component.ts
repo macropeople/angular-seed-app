@@ -12,7 +12,7 @@ import { SASjsConfig } from 'sasjs';
 export class AppComponent implements OnInit {
   public isLoggedIn: boolean = true;
   public requestModal: boolean = false;
-  public sasjsConfig: SASjsConfig | undefined;
+  public sasjsConfig: SASjsConfig = new SASjsConfig();
 
   constructor(
     private stateService: StateService,
@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
   public debugChanged() {
     if (this.sasjsConfig) {
       this.sasService.setDebugState(this.sasjsConfig.debug);
-      this.getSasjsConfig();
     }
   }
 

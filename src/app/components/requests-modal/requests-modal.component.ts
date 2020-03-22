@@ -16,8 +16,6 @@ export class RequestsModalComponent implements OnInit {
   set opened(value: boolean) {
     this._opened = value;
     if (value) this.modalOpened();
-
-    console.log(this.sasjsRequests);
   }
 
   @Output() openedChange = new EventEmitter();
@@ -27,11 +25,13 @@ export class RequestsModalComponent implements OnInit {
   public sasGeneratedCodeActive: boolean = false;
   public tablesActive: boolean = false;
 
-  public sasjsConfig = this.sasService.getSasjsConfig();
+  public sasjsConfig: any;
   public sasjsRequests: any;
   public workTables: any;
 
-  constructor(private sasService: SasService) {}
+  constructor(private sasService: SasService) {
+    
+  }
 
   ngOnInit(): void {}
 
@@ -57,6 +57,7 @@ export class RequestsModalComponent implements OnInit {
   }
 
   public modalOpened() {
+    this.sasjsConfig = this.sasService.getSasjsConfig();
     this.sasjsRequests = this.sasService.getSasRequests();
   }
 }

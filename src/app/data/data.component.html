@@ -1,9 +1,9 @@
 <div class="data-page">
-  <span *ngIf="areas?.length < 1" class="spinner spinner-md">
+  <span *ngIf="areas.length < 1" class="spinner spinner-md">
     Loading...
   </span>
 
-  <div *ngIf="areas?.length > 0" class="areas-select-wrapper">
+  <div *ngIf="areas.length > 0" class="areas-select-wrapper">
     <select clrSelect name="options" [(ngModel)]="selectedArea">
       <option *ngIf="selectedArea === undefined" [value]="undefined">Select from dropdown</option>
       <option *ngFor="let area of areas" [value]="area['AREA']">{{area['AREA']}}</option>

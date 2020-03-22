@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from '../../state.service';
 import { SasService } from '../../sas.service';
 
 @Component({
@@ -12,7 +11,6 @@ export class LoginModalComponent implements OnInit {
   password = '';
 
   constructor(
-    public stateService: StateService,
     public sasService: SasService
     ) {}
 
