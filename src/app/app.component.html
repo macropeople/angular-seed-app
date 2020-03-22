@@ -1,6 +1,6 @@
 <header class="header-6">
   <div class="branding">
-      <img src="/assets/logo-white.png">
+      <img src="./assets/logo-white.png">
   </div>
   <div class="header-nav">
       <a routerLinkActive="active" routerLink="/homepage" class="nav-link nav-text">Homepage</a>
@@ -29,8 +29,6 @@
 
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="!(isLoggedIn$ | async)">
-  <app-login-modal></app-login-modal>
-</ng-container>
+<app-login-modal *ngIf="!isLoggedIn"></app-login-modal>
 
 <app-requests-modal [(opened)]="requestModal"></app-requests-modal>

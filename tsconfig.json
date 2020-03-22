@@ -1,7 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": "./",
+    "baseUrl": "",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -10,13 +11,14 @@
     "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
+    "strict": true,
     "target": "es2015",
+    "allowJs": true,
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
-    "enableIvy": false
+    "strictInjectionParameters": true
   }
 }

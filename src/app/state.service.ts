@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export interface AppState {
   isUserLoggedIn: boolean;
+  startupData: any;
 }
 
 @Injectable({

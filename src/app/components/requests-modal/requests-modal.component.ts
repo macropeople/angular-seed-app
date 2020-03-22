@@ -16,8 +16,6 @@ export class RequestsModalComponent implements OnInit {
   set opened(value: boolean) {
     this._opened = value;
     if (value) this.modalOpened();
-
-    console.log(this.sasjsRequests);
   }
 
   @Output() openedChange = new EventEmitter();
@@ -27,11 +25,13 @@ export class RequestsModalComponent implements OnInit {
   public sasGeneratedCodeActive: boolean = false;
   public tablesActive: boolean = false;
 
-  public sasjsConfig = this.sasService.getSasjsConfig();
-  public sasjsRequests;
-  public workTables;
+  public sasjsConfig: any;
+  public sasjsRequests: any;
+  public workTables: any;
 
-  constructor(private sasService: SasService) {}
+  constructor(private sasService: SasService) {
+    
+  }
 
   ngOnInit(): void {}
 
@@ -39,24 +39,25 @@ export class RequestsModalComponent implements OnInit {
     return `${this.formatTimestamp(timestamp)} ${this.timestampFromNow(timestamp)}`
   }
 
-  public formatTimestamp(timestamp) {
+  public formatTimestamp(timestamp: any) {
     return moment(timestamp).format
     ? moment(timestamp).format('dddd, MMMM Do YYYY, h:mm:ss a')
     : timestamp;
   }
 
-  public timestampFromNow(timestamp) {
+  public timestampFromNow(timestamp: any) {
     return moment(timestamp).format
     ? ` (${moment(timestamp).fromNow()})`
     : '';
   }
 
-  public modalOpenChange(state) {
+  public modalOpenChange(state: any) {
     this.opened = state;
     this.openedChange.emit(this.opened);
   }
 
   public modalOpened() {
+    this.sasjsConfig = this.sasService.getSasjsConfig();
     this.sasjsRequests = this.sasService.getSasRequests();
   }
 }

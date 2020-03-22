@@ -8,8 +8,8 @@ import { SasService } from '../sas.service';
   styleUrls: ['./data.component.scss']
 })
 export class DataComponent implements OnInit {
-  public areas = this.stateService.startupData;
-  public selectedArea: any;
+  public areas: any[] = [];
+  public selectedArea: any = null;
   public springs: any[] = [];
   public springsLoading: boolean = false;
 
@@ -21,13 +21,16 @@ export class DataComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.stateService.startupData.subscribe((data: any) => {
+      this.areas = data;
+    });
   }
 
   public submitData() {
     this.springsLoading = true;
     let data = {areas: [{ area: this.selectedArea }]};
 
-    this.sasService.request("/common/getData", data).then(res => {
+    this.sasService.request("/common/getData", data).then((res: any) => {
       this.springs = res['springs'];
       this.springsLoading = false;
     });

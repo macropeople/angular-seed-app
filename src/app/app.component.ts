@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StateService } from './state.service';
-import { Subscription } from 'rxjs';
 import { SasService } from './sas.service';
 
 import { SASjsConfig } from 'sasjs';
@@ -11,9 +10,9 @@ import { SASjsConfig } from 'sasjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public isLoggedIn$ = this.stateService.isUserLoggedIn;
+  public isLoggedIn: boolean = true;
   public requestModal: boolean = false;
-  public sasjsConfig: SASjsConfig
+  public sasjsConfig: SASjsConfig = new SASjsConfig();
 
   constructor(
     private stateService: StateService,
@@ -24,11 +23,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getSasjsConfig();
+
+    this.stateService.isUserLoggedIn.subscribe((isLoggedIn: boolean) => {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
 
   public debugChanged() {
-    this.sasService.setDebugState(this.sasjsConfig.debug);
-    this.getSasjsConfig();
+    if (this.sasjsConfig) {
+      this.sasService.setDebugState(this.sasjsConfig.debug);
+    }
   }
 
   public getSasjsConfig() {
