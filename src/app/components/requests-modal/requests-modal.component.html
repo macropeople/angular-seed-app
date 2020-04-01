@@ -1,7 +1,7 @@
 <clr-modal [clrModalOpen]="opened" (clrModalOpenChange)="modalOpenChange($event)" clrModalSize="xl">
     <h3 class="modal-title">
         Request History
-        <p style="margin-top: 0;">App Location: {{sasjsConfig.appLoc}}</p>
+        <p style="margin-top: 0;">App Location: {{sasjsConfig?.appLoc}}</p>
     </h3>
     <div style="height: 70vh;" class="modal-body">
         <p *ngIf="!sasjsRequests" class="no-reqs">No requests made</p>
