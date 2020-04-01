@@ -26,9 +26,13 @@ export class SasService {
     });
   }
 
-  public request(url: string, data: any) {
+  public request(url: string, data: any, params?: any, ) {
+    if (!params) params = null;
+
     return new Promise((resolve, reject) => {
-      this._sasService.request(url, data).then((res: any) => {
+      this._sasService.request(url, data, params, (loginRequired: boolean) => {
+        if (loginRequired) this.stateService.setIsLoggedIn(false);
+      }).then((res: any) => {
         if (res.login === false) {
           this.stateService.setIsLoggedIn(false);
           reject(false);
