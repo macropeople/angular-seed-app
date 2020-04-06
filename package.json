@@ -9,8 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-watch": "ng build --watch",
-    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: ${npm_config_account} && npm run deploy --account=${npm_config_account} && echo 'App is synced!'\" dist",
-    "deploy": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@demo.analytium.co.uk:/var/www/html/${npm_config_account}"
+    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: ${npm_config_account} && npm run ${npm_config_serverType} --account=${npm_config_account} && echo 'App is synced!'\" dist",
+    "sas9": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@demo.analytium.co.uk:/var/www/html/${npm_config_account}/ngseed",
+    "viya": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@sas.analytium.co.uk:/var/www/html/${npm_config_account}/ngseed"
   },
   "private": true,
   "dependencies": {
