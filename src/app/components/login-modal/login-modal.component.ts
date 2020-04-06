@@ -21,7 +21,6 @@ export class LoginModalComponent implements OnInit {
   signIn() {
     this.sasService.login(this.userName, this.password).then((success: any) => {
       if (success) {
-        window.location.reload();
       } else {
         alert("Wrong username or password, please try again.");
       }
