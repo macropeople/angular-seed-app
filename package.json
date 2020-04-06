@@ -7,7 +7,10 @@
     "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-watch": "ng build --watch",
+    "sync": "./node_modules/.bin/watch --wait=3 \"echo Account: ${npm_config_account} && npm run deploy --account=${npm_config_account} && echo 'App is synced!'\" dist",
+    "deploy": "rsync -avhe ssh ./dist/* --delete ${npm_config_account}@demo.analytium.co.uk:/var/www/html/${npm_config_account}"
   },
   "private": true,
   "dependencies": {

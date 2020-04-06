@@ -13,8 +13,9 @@ export class SasService {
     private stateService: StateService
   ) {
     this._sasService = new SASjs({
+      serverUrl: "",
       appLoc: "/Public/app",
-      serverType: "SAS9",
+      serverType: "SASVIYA",
       debug: true
     });
   }
