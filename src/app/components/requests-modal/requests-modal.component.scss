@@ -1,4 +1,8 @@
 ::ng-deep {
+    .requests-modal .modal-header .close clr-icon {
+        display: block !important;
+    }
+
     .work-tables-dropdown button {
         color: var(--clr-nav-link-color, #8c8c8c) !important;
     }
@@ -8,9 +12,16 @@
     }
 
     .content {
+        clr-icon {
+            margin-bottom: 5px;
+        }
+
         pre {
             word-break: break-all;
             white-space: pre-wrap;
+            max-height: initial;
+            overflow: visible;
+            border: 0;
         }
 
         .stack-block-label {
@@ -40,6 +51,9 @@
 
     border: 1px solid #e2e2e2;
     background-color: #fbfbfb;
+
+    height: 48vh;
+    overflow: auto;
 }
 
 .no-reqs {

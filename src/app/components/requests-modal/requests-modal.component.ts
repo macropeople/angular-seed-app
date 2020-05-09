@@ -26,7 +26,7 @@ export class RequestsModalComponent implements OnInit {
   public tablesActive: boolean = false;
 
   public sasjsConfig: any;
-  public sasjsRequests: any;
+  public sasjsRequests: any[] = [];
   public workTables: any;
 
   constructor(private sasService: SasService) {
@@ -59,5 +59,67 @@ export class RequestsModalComponent implements OnInit {
   public modalOpened() {
     this.sasjsConfig = this.sasService.getSasjsConfig();
     this.sasjsRequests = this.sasService.getSasRequests();
+
+    for (let req of this.sasjsRequests) {
+      this.parseErrorsAndWarnings(req);
+
+      req['appLoc'] = this.cutAppLoc(req.serviceLink);
+      req['parsedTimestamp'] = this.parseLogTimestamp(req.timestamp);
+    }
+  }
+
+  public cutAppLoc(link: string) {
+    return link.replace(this.sasjsConfig.appLoc + '/', '');
+  }
+
+  public goToLogLine(linkingLine: string, requestStackId: string, type: string) {
+    let allLines: any = document.querySelectorAll(`#${requestStackId} .log-wrapper.saslog font`);
+    let logWrapper: any = document.querySelector(`#${requestStackId} .log-wrapper.saslog`);
+
+    for (let line of allLines) {
+      if (line.textContent.includes(linkingLine)) {
+        logWrapper.scrollTop = line.offsetTop - logWrapper.offsetTop;
+        line.style.backgroundColor = "#61a2202b";
+
+        setTimeout(() => {
+          line.style = '';
+        }, 3000);
+      }
+    }
+  }
+
+  public async parseErrorsAndWarnings(req: any) {
+    if (!req || !req.logFile) return;
+    if (req['logErrors'] !== undefined || req['logWarnings'] !== undefined) return;
+
+    let errorLines = [];
+    let warningLines = [];
+
+    let logLines = req.logFile.split('\n');
+
+    for (let i = 0; i < logLines.length; i++) {
+      if (/<font.*>ERROR/gm.test(logLines[i])) {
+        let errorLine = logLines[i].substring(logLines[i].indexOf('E'), logLines[i].length - 1);
+        errorLines.push(errorLine);
+      } else if (/^ERROR/gm.test(logLines[i])) {
+        errorLines.push(logLines[i]);
+
+        logLines[i] = '<font>' + logLines[i] + '</font>';
+      }
+
+      if (/<font.*>WARNING/gm.test(logLines[i])) {
+        let warningLine = logLines[i].substring(logLines[i].indexOf('W'), logLines[i].length - 1);
+        warningLines.push(warningLine);
+      } else if (/^WARNING/gm.test(logLines[i])) {
+        warningLines.push(logLines[i]);
+
+        logLines[i] = '<font>' + logLines[i] + '</font>';
+      }
+    }
+
+    console.log(warningLines);
+    req.logFile = logLines.join('\n');
+    req['logErrors'] = errorLines;
+    req['logWarnings'] = warningLines;
   }
 }
