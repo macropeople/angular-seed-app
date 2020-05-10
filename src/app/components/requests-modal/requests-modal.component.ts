@@ -98,7 +98,7 @@ export class RequestsModalComponent implements OnInit {
     let logLines = req.logFile.split('\n');
 
     for (let i = 0; i < logLines.length; i++) {
-      if (/<font.*>ERROR/gm.test(logLines[i])) {
+      if (/<.*>ERROR/gm.test(logLines[i])) {
         let errorLine = logLines[i].substring(logLines[i].indexOf('E'), logLines[i].length - 1);
         errorLines.push(errorLine);
       } else if (/^ERROR/gm.test(logLines[i])) {
@@ -107,7 +107,7 @@ export class RequestsModalComponent implements OnInit {
         logLines[i] = '<font>' + logLines[i] + '</font>';
       }
 
-      if (/<font.*>WARNING/gm.test(logLines[i])) {
+      if (/<.*>WARNING/gm.test(logLines[i])) {
         let warningLine = logLines[i].substring(logLines[i].indexOf('W'), logLines[i].length - 1);
         warningLines.push(warningLine);
       } else if (/^WARNING/gm.test(logLines[i])) {
