@@ -16,6 +16,8 @@ export class StateService {
   private startupData$ = new BehaviorSubject([]);
   public startupData = this.startupData$.asObservable();
 
+  public username = new BehaviorSubject("");
+
   public setIsLoggedIn(value: boolean) {
     this.isUserLoggedIn$.next(value);
   }
