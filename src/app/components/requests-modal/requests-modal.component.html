@@ -1,15 +1,26 @@
-<clr-modal [clrModalOpen]="opened" (clrModalOpenChange)="modalOpenChange($event)" clrModalSize="xl">
+<clr-modal [clrModalOpen]="opened" (clrModalOpenChange)="modalOpenChange($event)" clrModalSize="xl" class="requests-modal">
     <h3 class="modal-title">
         Request History
         <p style="margin-top: 0;">App Location: {{sasjsConfig?.appLoc}}</p>
     </h3>
     <div style="height: 70vh;" class="modal-body">
-        <p *ngIf="!sasjsRequests" class="no-reqs">No requests made</p>
+        <p *ngIf="sasjsRequests.length < 1" class="no-reqs">No requests made</p>
         
-        <clr-stack-view *ngIf="sasjsRequests">
-            <clr-stack-block *ngFor="let programLog of sasjsRequests">
-                <clr-stack-label>{{programLog.serviceLink}}</clr-stack-label>
-                <clr-stack-content>{{parseLogTimestamp(programLog.timestamp)}}</clr-stack-content>
+        <clr-stack-view *ngIf="sasjsRequests.length > 0">
+            <clr-stack-block *ngFor="let programLog of sasjsRequests; let i = index" [id]="'request_' + i">
+                <clr-stack-label>
+                    {{programLog['appLoc']}}
+                    <span style="margin-left: 10px;">
+                        <span *ngIf="programLog.logWarnings?.length > 0">
+                            <clr-icon style="margin-bottom: 5px; color: green;" shape="exclamation-circle"></clr-icon>
+                        </span>
+
+                        <span *ngIf="programLog.logErrors?.length > 0">
+                            <clr-icon style="margin-bottom: 5px; color: red;" shape="exclamation-triangle"></clr-icon>
+                        </span>
+                    </span>
+                </clr-stack-label>
+                <clr-stack-content>{{programLog['parsedTimestamp']}}</clr-stack-content>
                 <clr-stack-block class="content">
                     <clr-stack-content>
 
@@ -18,7 +29,30 @@
                                 <button clrTabLink>SAS Log</button>
                                 <ng-template [(clrIfActive)]="sasLogActive">
                                     <clr-tab-content>
-                                        <div class="log-wrapper" [innerHTML]="programLog.logFile"></div>
+                                        <clr-tree>
+                                            <clr-tree-node *ngIf="programLog.logErrors">
+                                                <clr-icon style="color: red;" shape="exclamation-triangle"></clr-icon>
+                                                Errors ({{programLog.logErrors.length}})
+                                                <clr-tree-node (click)="goToLogLine(err, 'request_' + i, 'error')" *ngFor="let err of programLog.logErrors || []">
+                                                    <button class="clr-treenode-link">
+                                                        {{err}}
+                                                    </button>
+                                                </clr-tree-node>
+                                            </clr-tree-node>
+
+                                            <clr-tree-node *ngIf="programLog.logWarnings">
+                                                <clr-icon style="color: green;" shape="exclamation-circle"></clr-icon>
+                                                Warnings ({{programLog.logWarnings.length}})
+                                                <clr-tree-node (click)="goToLogLine(warning, 'request_' + i, 'warning')" *ngFor="let warning of programLog.logWarnings || []">
+                                                    <button class="clr-treenode-link">
+                                                        {{warning}}
+                                                    </button>
+                                                </clr-tree-node>
+                                            </clr-tree-node>
+                                        </clr-tree>
+
+                                        <div class="log-wrapper saslog" [innerHTML]="programLog.logFile">
+                                        </div>
                                     </clr-tab-content>
                                 </ng-template>
                             </clr-tab>
@@ -27,7 +61,7 @@
                                 <button clrTabLink>SAS Source Code</button>
                                 <ng-template [(clrIfActive)]="sasSourceCodeActive">
                                     <clr-tab-content>
-                                        <div class="log-wrapper" [innerHTML]="programLog.sourceCode"></div>
+                                        <div class="log-wrapper">{{programLog.sourceCode}}</div>
                                     </clr-tab-content>
                                 </ng-template>
                             </clr-tab>
@@ -36,12 +70,12 @@
                                 <button clrTabLink>SAS Generated Code</button>
                                 <ng-template [(clrIfActive)]="sasGeneratedCodeActive">
                                     <clr-tab-content>
-                                        <div class="log-wrapper" [innerHTML]="programLog.generatedCode"></div>
+                                        <div class="log-wrapper">{{programLog.generatedCode}}</div>
                                     </clr-tab-content>
                                 </ng-template>
                             </clr-tab>
 
-                            <clr-tab>
+                            <clr-tab *ngIf="programLog.SASWORK">
                                 <clr-dropdown [clrCloseMenuOnItemClick]="true" class="work-tables-dropdown" clrTabLink>
                                     <button clrDropdownTrigger>
                                         SAS Work Tables

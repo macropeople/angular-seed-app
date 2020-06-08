@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   public isLoggedIn: boolean = true;
   public requestModal: boolean = false;
   public sasjsConfig: SASjsConfig = new SASjsConfig();
+  public username: string = "";
 
   constructor(
     private stateService: StateService,
@@ -26,6 +27,10 @@ export class AppComponent implements OnInit {
 
     this.stateService.isUserLoggedIn.subscribe((isLoggedIn: boolean) => {
       this.isLoggedIn = isLoggedIn;
+    });
+
+    this.stateService.username.subscribe((username: string) => {
+      this.username = username;
     });
   }
 

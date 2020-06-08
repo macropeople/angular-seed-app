@@ -36,8 +36,14 @@ export class SasService {
       }).then((res: any) => {
         if (res.login === false) {
           this.stateService.setIsLoggedIn(false);
+          this.stateService.username.next("");
           reject(false);
         }
+
+        if (this.stateService.username.getValue().length < 1 && res.MF_GETUSER) {
+          this.stateService.username.next(res.MF_GETUSER);
+        }
+
         resolve(res);
       }, (err: any) => {
         if (err) this.stateService.setIsLoggedIn(false);
@@ -53,6 +59,9 @@ export class SasService {
       (res: { isLoggedIn: boolean; userName: string }) => {
         console.log(res);
         this.stateService.setIsLoggedIn(res.isLoggedIn);
+
+        this.stateService.username.next(res.userName);
+
         return res.isLoggedIn;
       },
       (err: any) => {
@@ -72,6 +81,7 @@ export class SasService {
   public logout() {
     this._sasService.logOut().then(() => {
       this.stateService.setIsLoggedIn(false);
+      this.stateService.username.next("");
     })
   }
 

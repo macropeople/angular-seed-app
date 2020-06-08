@@ -9,6 +9,7 @@
   <div class="header-actions">
     <clr-dropdown [clrCloseMenuOnItemClick]="false">
       <button clrDropdownTrigger aria-label="user">
+        {{username.length > 0 ? username : 'Not logged in'}}
         <clr-icon shape="user"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
